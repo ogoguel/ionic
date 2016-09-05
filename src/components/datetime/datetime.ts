@@ -248,7 +248,7 @@ export const DATETIME_VALUE_ACCESSOR = new Provider(
 @Component({
   selector: 'ion-datetime',
   template: `
-  	<ion-input *ngIf="!_text" placeholder="{{placeholder}}"></ion-input>
+  	<input *ngIf="!_text" placeholder="{{placeholder}}" type="text" class="text-input">
     <div  *ngIf="_text" class="datetime-text">{{_text}}</div>
     <button aria-haspopup="true"
             type="button"
