@@ -248,7 +248,8 @@ export const DATETIME_VALUE_ACCESSOR = new Provider(
 @Component({
   selector: 'ion-datetime',
   template: `
-    <div class="datetime-text">{{_text}}</div>
+  	<ion-input *ngIf="!_text" placeholder="{{placeholder}}"></ion-input>
+    <div  *ngIf="_text" class="datetime-text">{{_text}}</div>
     <button aria-haspopup="true"
             type="button"
             [id]="id"
@@ -259,6 +260,7 @@ export const DATETIME_VALUE_ACCESSOR = new Provider(
     </button>
   `,
   host: {
+  	'style':'width:100%',
     '[class.datetime-disabled]': '_disabled'
   },
   providers: [DATETIME_VALUE_ACCESSOR],
@@ -404,6 +406,11 @@ export class DateTime implements AfterContentInit, ControlValueAccessor, OnDestr
    * See the [Picker API docs](../../picker/Picker) for the picker options.
    */
   @Input() pickerOptions: any = {};
+
+   /**
+   * @input {string} The text to display when there's no date selected yet. (using lowercase to match the input attribute)
+   */
+  @Input() placeholder: string = '';
 
   /**
    * @output {any} Any expression to evaluate when the datetime selection has changed.
@@ -580,7 +587,7 @@ export class DateTime implements AfterContentInit, ControlValueAccessor, OnDestr
     let dayOpt: PickerColumnOption;
 
     // default to assuming today's year
-    let selectedYear = today.getFullYear();
+   	let selectedYear = this._max ? this._max.year : today.getFullYear();
     if (yearCol) {
       yearOpt = yearCol.options[yearCol.selectedIndex];
       if (yearOpt) {

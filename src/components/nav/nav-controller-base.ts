@@ -684,7 +684,20 @@ export class NavControllerBase extends Ion implements NavController {
       opts.animate = false;
     }
 
-    this._beforeTrans(enteringView, leavingView, opts, done);
+  	var canActivate = Promise.resolve(true);
+
+        if (typeof enteringView.instance !== 'undefined' && typeof enteringView.instance.ionCanActivate === 'function') {
+              var result = enteringView.instance.ionCanActivate(enteringView, leavingView);
+              if (result instanceof Promise) {
+               canActivate = result;
+           }
+       }
+    
+        var __this = this
+        canActivate.then( function () {
+          __this._beforeTrans(enteringView, leavingView, opts, done) ;  
+        });
+
   }
 
   /**
