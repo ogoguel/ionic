@@ -587,7 +587,7 @@ export class DateTime implements AfterContentInit, ControlValueAccessor, OnDestr
     let dayOpt: PickerColumnOption;
 
     // default to assuming today's year
-    let selectedYear = today.getFullYear();
+   	let selectedYear = this._max ? this._max.year : today.getFullYear();
     if (yearCol) {
       yearOpt = yearCol.options[yearCol.selectedIndex];
       if (yearOpt) {
