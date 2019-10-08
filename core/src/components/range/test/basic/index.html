@@ -8,8 +8,8 @@
   <link href="../../../../../css/ionic.bundle.css" rel="stylesheet">
   <link href="../../../../../scripts/testing/styles.css" rel="stylesheet">
   <script src="../../../../../scripts/testing/scripts.js"></script>
-  <script src="../../../../../dist/ionic.js"></script>
-</head>
+  <script nomodule src="../../../../../dist/ionic/ionic.js"></script>
+  <script type="module" src="../../../../../dist/ionic/ionic.esm.js"></script></head>
 
 <body>
   <ion-app>
@@ -99,13 +99,10 @@
           <ion-range min="1000" max="2000" step="100" snaps="true" id="range"></ion-range>
         </ion-item>
         <ion-item>
+          <ion-range min="1000" max="2000" step="100" snaps="true" ticks="false"></ion-range>
+        </ion-item>
+        <ion-item>
           <ion-range dual-knobs="true" id="multiKnob"></ion-range>
-        </ion-item>
-        <ion-item>
-          <ion-range value="1300" min="1000" max="2000" step="100" snaps="true" neutral-point="1500" color="secondary"></ion-range>
-        </ion-item>
-        <ion-item>
-          <ion-range dual-knobs="true" neutral-point="30" min="21" max="72" step="3" snaps="true"></ion-range>
         </ion-item>
         <ion-item>
           <ion-range id="debounce" debounce="5000"></ion-range>

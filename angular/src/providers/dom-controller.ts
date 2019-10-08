@@ -22,16 +22,25 @@ export class DomController {
   }
 }
 
-function getQueue() {
-  const Ionic = (window as any).Ionic;
-  if (Ionic && Ionic.queue) {
-    return Ionic.queue;
+const getQueue = () => {
+  const win = typeof (window as any) !== 'undefined' ? window : null as any;
+
+  if (win != null) {
+    const Ionic = win.Ionic;
+    if (Ionic && Ionic.queue) {
+      return Ionic.queue;
+    }
+
+    return {
+      read: (cb: any) => win.requestAnimationFrame(cb),
+      write: (cb: any) => win.requestAnimationFrame(cb)
+    };
   }
 
   return {
-    read: (cb: any) => window.requestAnimationFrame(cb),
-    write: (cb: any) => window.requestAnimationFrame(cb)
+    read: (cb: any) => cb(),
+    write: (cb: any) => cb()
   };
-}
+};
 
 export type RafCallback = (timeStamp?: number) => void;

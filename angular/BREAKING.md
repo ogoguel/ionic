@@ -5,7 +5,7 @@
 
 ### Migration Guide
 
-If you aren't sure where to start in upgrading to v4, we recommend reading through our [migration guide](https://beta.ionicframework.com/docs/building/migration) first.
+If you aren't sure where to start in upgrading to v4, we recommend reading through our [migration guide](https://ionicframework.com/docs/building/migration) first.
 
 ### Migration Linter
 
@@ -62,7 +62,7 @@ A list of the breaking changes introduced to each component in Ionic Angular v4.
 
 ## Action Sheet
 
-The `title`, `subTitle` and `enableBackdropDismiss` properties has been renamed to `header`, `subHeader` and `backdropDismiss` respectively.
+The `title`, `subTitle` and `enableBackdropDismiss` properties have been renamed to `header`, `subHeader` and `backdropDismiss` respectively.
 
 **Old Usage Example:**
 
@@ -89,7 +89,7 @@ await actionSheet.present();
 
 ## Alert
 
-The `title`, `subTitle` and `enableBackdropDismiss` properties has been renamed to `header`, `subHeader` and `backdropDismiss` respectively.
+The `title`, `subTitle` and `enableBackdropDismiss` properties have been renamed to `header`, `subHeader` and `backdropDismiss` respectively.
 
 **Old Usage Example:**
 
@@ -182,13 +182,14 @@ These have been renamed to the following, and moved from the button element to t
 
 In addition, several sets of mutually exclusive boolean attributes have been combined into a single string attribute.
 
-The `small` and `large` attributes are now combined under the `size` attribute. The `clear`, `outline`, and `solid` attributes have been combined under `fill`. And, lastly, the `full` and `block` attributes have been combined under `expand`.
+The `small` and `large` attributes are now combined under the `size` attribute. The `clear`, `outline`, and `solid` attributes have been combined under `fill`. The `full` and `block` attributes have been combined under `expand`. And, lastly, the `round` attribute is now used under `shape`.
 
 | Old Property                | New Property | Property Behavior           |
 | --------------------------- | ------------ | --------------------------- |
 | `small`, `large`            | `size`       | Sets the button size.       |
 | `clear`, `outline`, `solid` | `fill`       | Sets the button fill style. |
 | `full`, `block`             | `expand`     | Sets the button width.      |
+| `round`                     | `shape`      | Sets the button shape.      |
 
 
 **Old Usage Example:**
@@ -225,6 +226,10 @@ The `small` and `large` attributes are now combined under the `size` attribute. 
 <ion-button full>
   Full-width Button
 </ion-button>
+
+<ion-button round>
+  Round Button
+</ion-button>
 ```
 
 **New Usage Example:**
@@ -250,6 +255,10 @@ The `small` and `large` attributes are now combined under the `size` attribute. 
 
 <ion-button expand="full">
   Full-width Button
+</ion-button>
+
+<ion-button shape="round">
+  Round Button
 </ion-button>
 ```
 
@@ -489,7 +498,7 @@ The `<ion-fab>` container was previously placed inside of the fixed content by d
 
 ### Markup Changed
 
-The Grid has been refactored in order to support css variables and a dynamic number of columns. The following column attributes have been changed.
+The Grid has been refactored in order to support CSS variables and a dynamic number of columns. The following column attributes have been changed.
 
 _In the following examples, `{breakpoint}` refers to the optional screen breakpoint (xs, sm, md, lg, xl) and `{value}` refers to the number of columns (`auto` or a number between `1` and `12`)._
 
@@ -498,7 +507,7 @@ _In the following examples, `{breakpoint}` refers to the optional screen breakpo
 - `push-{breakpoint}-{value}` attributes have been renamed to `push-{breakpoint}=“{value}”`
 - `pull-{breakpoint}-{value}` attributes have been renamed to `pull-{breakpoint}=“{value}”`
 
-Customizing the padding and width of a grid should now be done with css variables. For more information, see [Grid Layout](https://github.com/ionic-team/ionic-docs/blob/master/src/content/layout/grid.md).
+Customizing the padding and width of a grid should now be done with CSS variables. For more information, see [Grid Layout](https://github.com/ionic-team/ionic-docs/blob/master/src/content/layout/grid.md).
 
 ## Icon
 
@@ -774,6 +783,26 @@ The option component should now be written as an `ion-item-option`. Previously i
 
 The `getSlidingPercent` method has been renamed to `getSlidingRatio` since the function is returning a ratio of the open amount of the item compared to the width of the options.
 
+### Arguments Changed
+
+The `ionDrag` event no longer gets the sliding item as an argument. It now takes an event with a property `details` which contains two properties `amount` and `ratio` reflecting the absolute and ratio values of the sliding action respectively.
+
+**Old Usage Example:**
+
+```typescript
+dragged(item: ItemSliding) {
+  console.log(item.getSlidingPercent());
+  console.log(item.getOpenAmount());
+}
+```
+
+**New Usage Example:**
+```typescript
+dragged(ev: { details: { amount: number, ratio: number } }) {
+  console.log(ev.details.ratio);
+  console.log(ev.details.amount);
+}
+```
 
 ## Label
 
@@ -1063,13 +1092,13 @@ openLoading() {
 ```javascript
 async openLoading() {
   let loading = this.loadingCtrl.create({
-    content: 'Loading...'
+    message: 'Loading...'
   });
-  
+
   await loading.present();
-  
+
   const { role, data } = await loading.onDidDismiss();
-    
+
   console.log('Loading dismissed!');
 }
 ```
@@ -1740,19 +1769,19 @@ Changes the `font-family` of the whole page based on the mode selected (iOS or M
 The following set of CSS files are optional and can safely be commented out if the application is not using any of the features.
 
 - **padding.css**
-Adds utility attributes that allow adding `padding` and `margin` attributes to any element. See [content space](https://beta.ionicframework.com/docs/layout/css-utilities#content-space) for what this includes.
+Adds utility attributes that allow adding `padding` and `margin` attributes to any element. See [content space](https://ionicframework.com/docs/layout/css-utilities#content-space) for what this includes.
 
 - **float-elements.css**
-Adds utility attributes that allow adding `float` attributes to any element. See [element placement](https://beta.ionicframework.com/docs/layout/css-utilities/#element-placement) for what this includes.
+Adds utility attributes that allow adding `float` attributes to any element. See [element placement](https://ionicframework.com/docs/layout/css-utilities/#element-placement) for what this includes.
 
 - **text-alignment.css**
-Adds utility attributes that allow adding text alignment attributes to any element. See [text alignment](https://beta.ionicframework.com/docs/layout/css-utilities/#text-alignment) for what this includes.
+Adds utility attributes that allow adding text alignment attributes to any element. See [text alignment](https://ionicframework.com/docs/layout/css-utilities/#text-alignment) for what this includes.
 
 - **text-transformation.css**
-Adds utility attributes that allow adding text transformation attributes to any element. See [text transformation](https://beta.ionicframework.com/docs/layout/css-utilities/#text-transformation) for what this includes.
+Adds utility attributes that allow adding text transformation attributes to any element. See [text transformation](https://ionicframework.com/docs/layout/css-utilities/#text-transformation) for what this includes.
 
 - **flex-utils.css**
-Adds utility attributes that allow adding flex container and item attributes to any element. See [flex properties](https://beta.ionicframework.com/docs/layout/css-utilities/#flex-properties) for what this includes.
+Adds utility attributes that allow adding flex container and item attributes to any element. See [flex properties](https://ionicframework.com/docs/layout/css-utilities/#flex-properties) for what this includes.
 
 
 #### Including the CSS Files
@@ -1769,7 +1798,7 @@ To include the stylesheet for testing such as in a Plunker, Codepen, or anywhere
 
 #### Production
 
-To use the css in production, we recommend importing it into a global file, such as `app/global.scss`:
+To use the CSS in production, we recommend importing it into a global file, such as `app/global.scss`:
 
 ```css
 /** Basic CSS for Ionic Apps */
@@ -1831,7 +1860,7 @@ p {
 
 Sass variables should no longer be used to change Ionic components. We have built Ionic to be customizable using CSS variables, instead.
 
-For more information on theming, check out the [theming documentation](https://beta.ionicframework.com/docs/theming/basics).
+For more information on theming, check out the [theming documentation](https://ionicframework.com/docs/theming/basics).
 
 
 ## Toast
